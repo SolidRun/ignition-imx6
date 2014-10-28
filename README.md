@@ -11,7 +11,7 @@ Each directory is a distribution installation cookbook that provides name, descr
 
 Optionally it might provide a list to the user to choose from, and up to 4 custom checkboxes with different defaults that the user can choose from.
 
-Structure of Ignition directory structure
+Ignition scripts directory structure
 -----------------------------------------
 
 #### <i class="icon-folder-open"></i> Directory
