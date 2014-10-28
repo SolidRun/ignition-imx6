@@ -3,7 +3,9 @@ Ignition-imx6
 
 Ignition scripts for SolidRun's i.MX6 based mini computers.
 
-Those scripts are intended to be downloaded by Ignition as a gzipped tarball. After being downloaded Ignition scans the directories and provides the user a list of distributions to install from.
+Those scripts are intended to be downloaded by Ignition as a gzipped tarball. For that Ignitio uses github API.
+
+After being downloaded Ignition scans the directories and provides the user a list of distributions to install from.
 
 Each directory is a distribution installation cookbook that provides name, description, icon and installation script.
 
