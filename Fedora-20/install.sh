@@ -7,7 +7,7 @@ echo "Downloading and flashing Fedora 20"
 curl -L -k https://googledrive.com/host/0B0vm64JM4bFZMjFNTGJBT1ozWjg --progress | unxz | dd of=/dev/mmcblk0 bs=1M conv=fsync
 if [ "x$RESIZE" == "xtrue" ]; then
 	echo -e "d\n3\nn\np\n3\n\n\nw\n" | fdisk /dev/mmcblk0
-	e2fsck -f /dev/mmcblk0p3
-	resize2fs /dev/mmcblk0p3
+	e2fsck -f /dev/mmcblk0p3 || true
+	resize2fs /dev/mmcblk0p3 || true
 fi
 sync
