@@ -10,8 +10,8 @@ echo "Downloading and flashing Fedora 20"
 # Flash the full image
 curl -L -k https://googledrive.com/host/0B0vm64JM4bFZMjFNTGJBT1ozWjg --progress | unxz | dd of=/dev/mmcblk0 bs=1M conv=fsync
 if [ "x$RESIZE" == "xtrue" ]; then
-	partx --show /dev/mmcblk0 2>/dev/null | while read NR START END; do : ; done
-        echo -e "d\n${NR}\nn\np\n${NR}\n${START}\n\nw\n" | fdisk /dev/mmcblk0
+	SS=$(partx --show /dev/mmcblk0 | cut -f3 -d' ' | tail -1)
+        echo -e "d\n3\nn\np\n\n${SS}\n\nw\n" | fdisk /dev/mmcblk0
 	e2fsck -f /dev/mmcblk0p3
 	resize2fs /dev/mmcblk0p3
 fi
