@@ -1,9 +1,10 @@
 #!/bin/bash
 set -e
 echo "Downloading"
-curl -L -k http://cubie.nobrainz.de/downloads/Cubox-i_Debian_2.0_wheezy.zip --progress > /tmp/deb.zip
+DIST_NAME=Cubox-i_Debian_2.2_wheezy_3.14.14
+curl -L -k http://mirror.igorpecovnik.com/${DIST_NAME}.zip --progress > /tmp/deb.zip
 echo "Flashing"
 echo "### 70.0%"
-unzip /tmp/deb.zip Cubox-i_Debian_2.0_wheezy.raw -p | dd of=/dev/mmcblk0 bs=1M conv=fsync
+unzip /tmp/deb.zip ${DIST_NAME}.raw -p | dd of=/dev/mmcblk0 bs=1M conv=fsync
 echo "### 100%"
 sync
