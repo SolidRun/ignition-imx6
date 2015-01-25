@@ -1,0 +1,6 @@
+Username=imx6 ; Password=linux
+
+This is a Proof-of-Concept image to show that Chromium can use the GPU and VPU to provide a flawless user experience.
+It is by no way a complete debian-port, instead teh focus is purely on the Chromium Web-Browser!
+
+This image is based on debian wheezy, but a version using Ubuntu Trusty is currently in the works.
