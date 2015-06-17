@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 echo "Downloading"
-curl -L -k http://releases.openelec.tv/OpenELEC-imx6.arm-5.92.2.tar --progress > /tmp/oe.tar
+curl -L -k http://releases.openelec.tv/OpenELEC-imx6.arm-5.95.2.tar --progress > /tmp/oe.tar
 mkdir -p /tmp/oe
 cd /tmp/oe
 # Untar and remove the leading directory name
