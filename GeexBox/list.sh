@@ -1,5 +1,9 @@
 #!/bin/bash
 
-rm -rf /tmp/index.html
-wget http://download.geexbox.org/snapshots/geexbox-xbmc-imx6-cuboxi/ -O /tmp/index.html
-grep href /tmp/index.html | cut -f2 -d'"' | grep -v "\.\./" > /tmp/list.out
+GB_HOST="http://download.geexbox.org/snapshots"
+
+rm -rf /tmp/index.html /tmp/list.out
+for GB_TYPE in kodi xbmc; do
+  wget -q ${GB_HOST}/geexbox-${GB_TYPE}-imx6-cuboxi/ -O /tmp/index.html
+  grep "href.* -" /tmp/index.html | cut -f2 -d'"' | sed -e "s%^%${GB_TYPE}: %" -e "s%/%%" | sort -r >> /tmp/list.out
+done
