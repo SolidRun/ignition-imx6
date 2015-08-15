@@ -8,5 +8,5 @@ elif [ "x$XFCE" == "xtrue" ]; then
 else
 	IMG=http://files.jm0.eu/suse/openSUSE-13.2-ARM-JeOS-cuboxi.armv7l.raw.xz
 fi
-curl -L -k $IMG --progress | unxz | dd of=/dev/mmcblk0 bs=1M
+curl -L -k $IMG --progress | unxz | dd of=/dev/mmcblk0 bs=4M
 sync
