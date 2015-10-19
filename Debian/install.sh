@@ -27,12 +27,12 @@ if [[ $CHOICE = Wheezy* ]]; then
 	# find selected flavour
 	if [[ $CHOICE = *CLI* ]]; then
 		printf "Selected Flavour: %s\n" "CLI"
-		$SHELL $(dirname $0)/ignition2.sh /dev/mmcblk0 http://shell.r00t.website/images/sr-imx6-debian-wheezy-cli-20150918.img.xz
+		$SHELL $(dirname $0)/ignition2.sh /dev/mmcblk0 https://images.solid-build.xyz/IMX6/Debian/sr-imx6-debian-wheezy-cli-20151019.img.xz
 		exit $?
 	fi
 	if [[ $CHOICE = *XFCE* ]]; then
 		printf "Selected Flavour: %s\n" "XFCE"
-		$SHELL $(dirname $0)/ignition2.sh /dev/mmcblk0 http://shell.r00t.website/images/sr-imx6-debian-wheezy-xfce-20150918.img.xz
+		$SHELL $(dirname $0)/ignition2.sh /dev/mmcblk0 https://images.solid-build.xyz/IMX6/Debian/sr-imx6-debian-wheezy-xfce-20151019.img.xz
 		exit $?
 	fi
 
