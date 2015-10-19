@@ -40,8 +40,14 @@ if [[ $CHOICE = Wheezy* ]]; then
 	printf "Selected Flavour: %s\n" "Unknown"
 	exit 1
 fi
-if [[ $CHOICE = Wheezy* ]]; then
+if [[ $CHOICE = Jessie* ]]; then
 	printf "Selected Release: %s\n" "Jessie"
+	# find selected flavour
+	if [[ $CHOICE = *CLI* ]]; then
+		printf "Selected Flavour: %s\n" "CLI"
+		$SHELL $(dirname $0)/ignition2.sh /dev/mmcblk0 https://images.solid-build.xyz/IMX6/Debian/sr-imx6-debian-jessie-cli-20151019.img.xz
+		exit $?
+	fi
 
 	# unknown flavour
 	printf "Selected Flavour: %s\n" "Unknown"
