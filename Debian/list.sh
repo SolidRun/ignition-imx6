@@ -24,4 +24,5 @@
 cat > /tmp/list.out << EOF
 Wheezy CLI
 Wheezy Desktop XFCE
+Jessie CLI
 EOF
