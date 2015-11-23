@@ -3,7 +3,7 @@ set -e
 echo "Downloading and flashing Android AOSPBox-i R1.6"
 # Below the --progrss will emit percentage that can be used by the gui to show progress bar
 # the bs=1M is critical since it writes much more efficnient to the micro SD
-curl -L -k http://sourceforge.net/projects/aospboxi/files/cuboxi_AOSPBox-i_R1.6.img.xz/download --progress | unxz | dd of=/dev/mmcblk0 bs=1M conv=fsync
+curl -L -k http://sourceforge.net/projects/aospboxi/files/SolidDroid_KK-R1.0.img.xz/download --progress | unxz | dd of=/dev/mmcblk0 bs=1M conv=fsync
 if [ "x$RESIZE" == "xtrue" ]; then
 	# The sector below 100000 is in order to trick fdisk to allocate from
 	# the first available sector after 100000 instead of the beginning
