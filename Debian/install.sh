@@ -49,6 +49,12 @@ if [[ $CHOICE = Jessie* ]]; then
 		exit $?
 	fi
 
+	if [[ $CHOICE = *Mate* ]]; then
+		printf "Selected Flavour: %s\n" "XFCE"
+		$SHELL $(dirname $0)/ignition2.sh /dev/mmcblk0 https://images.solid-build.xyz/IMX6/Debian/sr-imx6-debian-jessie-mate-latest.img.xz
+		exit $?
+	fi
+
 	# unknown flavour
 	printf "Selected Flavour: %s\n" "Unknown"
 	exit 1
