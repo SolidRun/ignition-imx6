@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 echo "Downloading"
-DIST_NAME=Armbian_4.5_Cubox-i_Debian_jessie_3.14.54_desktop
+DIST_NAME=Armbian_5.00_Cubox-i_Debian_jessie_3.14.60_desktop
 curl -L -k http://mirror.igorpecovnik.com/${DIST_NAME}.zip --progress > /tmp/deb.zip
 echo "Flashing"
 echo "### 70.0%"
