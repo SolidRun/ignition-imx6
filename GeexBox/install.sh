@@ -1,17 +1,53 @@
 #!/bin/bash
 set -e
 
-GB_HOST="http://download.geexbox.org/snapshots"
-# Remove white spaces
-GB_TYPE=`echo ${CHOICE} | cut -f1 -d':' | tr -d ' '`
-GB_DATE=`echo ${CHOICE} | cut -f2 -d':' | tr -d ' '`
+GB_HOST="http://download.geexbox.org"
 
-curl -L -k ${GB_HOST}/geexbox-${GB_TYPE}-imx6-cuboxi/${GB_DATE}/binaries.cuboxi/ --silent > /tmp/index.html
-IMG=`grep "\.img\.xz" /tmp/index.html | cut -f2 -d'"'`
-if [ "x$IMG" == "x" ]; then
-  echo "Image file is not found at ${GB_HOST}/geexbox-${GB_TYPE}-imx6-cuboxi/${GB_DATE}/binaries.cuboxi/"
+# Prepare args
+GB_TYPE=$(echo "${CHOICE}" | cut -f1 -d' ' | tr -d ':')
+GB_DATE=$(echo "${CHOICE}" | cut -f2 -d' ' | tr -d ':')
+
+if [ -z "$GB_TYPE" ] || [ -z "$GB_DATE" ]; then
+  echo "Invalid parameters ${CHOICE}"
   exit -1
 fi
-curl -L -k ${GB_HOST}/geexbox-${GB_TYPE}-imx6-cuboxi/${GB_DATE}/binaries.cuboxi/$IMG --progress > /tmp/geexbox.img.xz
-xzcat -c /tmp/geexbox.img.xz | dd of=/dev/mmcblk0 bs=1M conv=fsync
+
+rm -f /tmp/index.html /tmp/make-sdcard
+
+if [ "$GB_TYPE" = "next" ]; then
+  GB_URLPATH="${GB_HOST}/experiments/geexbox-kodi-imx6-cuboxi/binaries.cuboxi/"
+
+  curl -L -k ${GB_URLPATH} --silent -o /tmp/index.html
+  IMG=$(grep "\.tar\.xz" /tmp/index.html | cut -f2 -d'"')
+  if [ "x$IMG" == "x" ]; then
+    echo "Image file is not found at ${GB_URLPATH}"
+    exit -1
+  fi
+
+  curl -L -k ${GB_URLPATH}make-sdcard --silent -o /tmp/make-sdcard
+  if ! chmod +x /tmp/make-sdcard; then
+    echo "Script file is not found at ${GB_URLPATH}"
+    exit -1
+  fi
+
+else
+  GB_URLPATH="${GB_HOST}/snapshots/geexbox-${GB_TYPE}-imx6-cuboxi/${GB_DATE}/binaries.cuboxi/"
+
+  curl -L -k ${GB_URLPATH} --silent -o /tmp/index.html
+  IMG=$(grep "\.img\.xz" /tmp/index.html | cut -f2 -d'"')
+  if [ "x$IMG" == "x" ]; then
+    echo "Image file is not found at ${GB_URLPATH}"
+    exit -1
+  fi
+
+fi
+
+curl -L -k ${GB_URLPATH}${IMG} --progress -o /tmp/${IMG}
+
+if [ -e /tmp/make-sdcard ]; then
+  echo -e "y\n" | /tmp/make-sdcard /dev/mmcblk0 /tmp/${IMG} cuboxi
+else
+  xzcat -c /tmp/${IMG} | dd of=/dev/mmcblk0 bs=1M conv=fsync
+fi
+
 sync
