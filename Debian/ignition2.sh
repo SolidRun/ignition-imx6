@@ -32,6 +32,7 @@ fi
 disk="$1"
 url="$2"
 
+test -z "$UID" && UID=$(id -u)
 if [ "x$UID" != "x0" ]; then
 	echo "Error: This script requires root privileges!"
 	exit 1
@@ -42,12 +43,12 @@ cleanup() {
 	echo "An unknown error occured!"
 	exit 1
 }
-trap cleanup 0
+trap cleanup 1 2 3 6 9 14 15
 
 download() {
 	url="$1"
 
-	curl -k "$url" --progress
+	curl -k "$url" --progress --retry 20
 	return $?
 }
 
@@ -56,12 +57,15 @@ decompress() {
 
 	# detect compression, if any
 	if [[ $url = *.xz ]]; then
-		# unxz
 		xz -d
 		return $?
 	fi
 	if [[ $url = *.gz ]]; then
 		gzip -d
+		return $?
+	fi
+	if [[ $url = *.bz2 ]]; then
+		bzip2 -cd -
 		return $?
 	fi
 
@@ -73,7 +77,7 @@ decompress() {
 write() {
 	disk="$1"
 
-	dd of="$disk" bs=4M conv=fsync
+	tee $disk >dev/null
 	return $?
 }
 
@@ -84,7 +88,7 @@ set -o pipefail
 download "$url" | decompress "$url" | write "$disk"
 ret=$?
 if [ $ret != 0 ]; then
-	exit $ret
+	cleanup
 fi
 
 # clear trap
