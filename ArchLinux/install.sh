@@ -7,7 +7,7 @@ mount /dev/mmcblk0p1 /mnt
 cd /mnt
 curl -L -k http://archlinuxarm.org/os/ArchLinuxARM-imx6-cubox-latest.tar.gz --progress | tar -zxf -
 dd if=boot/SPL of=/dev/mmcblk0 bs=1K seek=1
-dd if=boot/u-boot.img of=/dev/mmcblk0 bs=1K seek=42
+dd if=boot/u-boot.img of=/dev/mmcblk0 bs=1K seek=69
 cd /
 umount /mnt
 sync
