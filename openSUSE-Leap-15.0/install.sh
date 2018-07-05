@@ -10,7 +10,7 @@ elif [ "x$LXQt" == "xtrue" ]; then
 elif [ "x$KDE" == "xtrue" ]; then
 	IMG=http://download.opensuse.org/ports/armv7hl/distribution/leap/15.0/appliances/openSUSE-Leap15.0-ARM-KDE-cuboxi.armv7l-2018.07.02-Buildlp150.1.1.raw.xz
 else
-	IMG=http://download.opensuse.org/ports/armv7hl/distribution/leap/15.0/appliances/openSUSE-Leap15.0-ARM-JeOS-efi.armv7l-2018.07.02-Buildlp150.1.1.raw.xz
+	IMG=http://download.opensuse.org/ports/armv7hl/distribution/leap/15.0/appliances/openSUSE-Leap15.0-ARM-JeOS-cuboxi.armv7l-2018.07.02-Buildlp150.1.1.raw.xz
 fi
 curl -L -k $IMG --progress | unxz | dd of=/dev/mmcblk0 bs=4M iflag=fullblock oflag=direct
 sync
