@@ -48,7 +48,7 @@ trap cleanup 1 2 3 6 9 14 15
 download() {
 	url="$1"
 
-	curl -k "$url" --progress --retry 20
+	curl -L -k "$url" --progress --retry 20
 	return $?
 }
 
@@ -77,7 +77,7 @@ decompress() {
 write() {
 	disk="$1"
 
-	tee $disk >dev/null
+	dd bs=4M of=$disk iflag=fullblock oflag=direct
 	return $?
 }
 
