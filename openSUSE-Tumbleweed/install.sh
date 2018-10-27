@@ -26,32 +26,32 @@
 # find selected flavour
 if [[ $CHOICE = *JeOS* ]]; then
 	printf "Selected Flavour: %s\n" "JeOS"
-	$SHELL $(dirname $0)/ignition2.sh /dev/mmcblk http://download.opensuse.org/ports/armv7hl/tumbleweed/images/openSUSE-Tumbleweed-ARM-JeOS-cubox.armv7l-Current.xz
+	$SHELL $(dirname $0)/ignition2.sh /dev/mmcblk0 http://download.opensuse.org/ports/armv7hl/tumbleweed/images/openSUSE-Tumbleweed-ARM-JeOS-cubox.armv7l-Current.xz
 	exit $?
 fi
 if [[ $CHOICE = *X11* ]]; then
 	printf "Selected Flavour: %s\n" "X11"
-	$SHELL $(dirname $0)/ignition2.sh /dev/mmcblk http://download.opensuse.org/ports/armv7hl/tumbleweed/images/openSUSE-Tumbleweed-ARM-X11-cuboxi.armv7l-Current.xz
+	$SHELL $(dirname $0)/ignition2.sh /dev/mmcblk0 http://download.opensuse.org/ports/armv7hl/tumbleweed/images/openSUSE-Tumbleweed-ARM-X11-cuboxi.armv7l-Current.xz
 	exit $?
 fi
 if [[ $CHOICE = *XFCE* ]]; then
 	printf "Selected Flavour: %s\n" "XFCE"
-	$SHELL $(dirname $0)/ignition2.sh /dev/mmcblk http://download.opensuse.org/ports/armv7hl/tumbleweed/images/openSUSE-Tumbleweed-ARM-XFCE-cuboxi.armv7l-Current.xz
+	$SHELL $(dirname $0)/ignition2.sh /dev/mmcblk0 http://download.opensuse.org/ports/armv7hl/tumbleweed/images/openSUSE-Tumbleweed-ARM-XFCE-cuboxi.armv7l-Current.xz
 	exit $?
 fi
 if [[ $CHOICE = *E20* ]]; then
 	printf "Selected Flavour: %s\n" "E20"
-	$SHELL $(dirname $0)/ignition2.sh /dev/mmcblk http://download.opensuse.org/ports/armv7hl/tumbleweed/images/openSUSE-Tumbleweed-ARM-E20-cuboxi.armv7l-Current.xz
+	$SHELL $(dirname $0)/ignition2.sh /dev/mmcblk0 http://download.opensuse.org/ports/armv7hl/tumbleweed/images/openSUSE-Tumbleweed-ARM-E20-cuboxi.armv7l-Current.xz
 	exit $?
 fi
 if [[ $CHOICE = *LXQt* ]]; then
 	printf "Selected Flavour: %s\n" "LXQt"
-	$SHELL $(dirname $0)/ignition2.sh /dev/mmcblk http://download.opensuse.org/ports/armv7hl/tumbleweed/images/openSUSE-Tumbleweed-ARM-LXQT-cuboxi.armv7l-Current.xz
+	$SHELL $(dirname $0)/ignition2.sh /dev/mmcblk0 http://download.opensuse.org/ports/armv7hl/tumbleweed/images/openSUSE-Tumbleweed-ARM-LXQT-cuboxi.armv7l-Current.xz
 	exit $?
 fi
 if [[ $CHOICE = *KDE* ]]; then
 	printf "Selected Flavour: %s\n" "KDE"
-	$SHELL $(dirname $0)/ignition2.sh /dev/mmcblk http://download.opensuse.org/ports/armv7hl/tumbleweed/images/openSUSE-Tumbleweed-ARM-KDE-cuboxi.armv7l-Current.xz
+	$SHELL $(dirname $0)/ignition2.sh /dev/mmcblk0 http://download.opensuse.org/ports/armv7hl/tumbleweed/images/openSUSE-Tumbleweed-ARM-KDE-cuboxi.armv7l-Current.xz
 	exit $?
 fi
 # unknown flavour
