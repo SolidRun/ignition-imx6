@@ -59,6 +59,19 @@ if [[ $CHOICE = Jessie* ]]; then
 	printf "Selected Flavour: %s\n" "Unknown"
 	exit 1
 fi
+if [[ $CHOICE = Stretch* ]]; then
+	printf "Selected Release: %s\n" "Stretch"
+	# find selected flavour
+	if [[ $CHOICE = *CLI* ]]; then
+		printf "Selected Flavour: %s\n" "CLI"
+		$SHELL $(dirname $0)/ignition2.sh /dev/mmcblk0 https://images.solid-build.xyz/IMX6/Debian/sr-imx6-debian-stretch-cli-20180916.img.xz
+		exit $?
+	fi
+
+	# unknown flavour
+	printf "Selected Flavour: %s\n" "Unknown"
+	exit 1
+fi
 
 # unknown release
 echo "Selected Release: %s\n" "Unknown"
