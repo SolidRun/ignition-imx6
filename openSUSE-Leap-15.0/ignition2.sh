@@ -78,7 +78,7 @@ decompress() {
 write() {
 	disk="$1"
 
-	dd bs=4M of=$disk iflag=fullblock oflag=direct
+	dd bs=4M of=$disk conv=fsync
 	return $?
 }
 
