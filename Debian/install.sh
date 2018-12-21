@@ -21,18 +21,30 @@
 # THE SOFTWARE.
 # 
 
+IMG_HOST="https://images.solid-build.xyz"
+IMG_DIR="/IMX6/Debian/"
+wget -q ${IMG_HOST}${IMG_DIR} -O /tmp/index.html
+
+WC_IMAGE="$(cat /tmp/index.html | grep -oh '<a href="sr-imx6-debian-wheezy-cli-201[0-9][0-9][0-9][0-9][0-9]\.img\.xz"' | cut -f2 -d'"' | sort | tail -1)"
+WD_IMAGE="$(cat /tmp/index.html | grep -oh '<a href="sr-imx6-debian-wheezy-xfce-201[0-9][0-9][0-9][0-9][0-9]\.img\.xz"' | cut -f2 -d'"' | sort | tail -1)"
+
+JC_IMAGE="$(cat /tmp/index.html | grep -oh '<a href="sr-imx6-debian-jessie-cli-201[0-9][0-9][0-9][0-9][0-9]\.img\.xz"' | cut -f2 -d'"' | sort | tail -1)"
+JD_IMAGE="$(cat /tmp/index.html | grep -oh '<a href="sr-imx6-debian-jessie-mate-201[0-9][0-9][0-9][0-9][0-9]\.img\.xz"' | cut -f2 -d'"' | sort | tail -1)"
+
+SC_IMAGE="$(cat /tmp/index.html | grep -oh '<a href="sr-imx6-debian-stretch-cli-201[0-9][0-9][0-9][0-9][0-9]\.img\.xz"' | cut -f2 -d'"' | sort | tail -1)"
+
 # find selected Distro
 if [[ $CHOICE = Wheezy* ]]; then
 	printf "Selected Release: %s\n" "Wheezy"
 	# find selected flavour
 	if [[ $CHOICE = *CLI* ]]; then
 		printf "Selected Flavour: %s\n" "CLI"
-		$SHELL $(dirname $0)/ignition2.sh /dev/mmcblk0 https://images.solid-build.xyz/IMX6/Debian/sr-imx6-debian-wheezy-cli-latest.img.xz
+		$SHELL $(dirname $0)/ignition2.sh /dev/mmcblk0 ${IMG_HOST}${IMG_DIR}${WC_IMAGE}
 		exit $?
 	fi
 	if [[ $CHOICE = *XFCE* ]]; then
 		printf "Selected Flavour: %s\n" "XFCE"
-		$SHELL $(dirname $0)/ignition2.sh /dev/mmcblk0 https://images.solid-build.xyz/IMX6/Debian/sr-imx6-debian-wheezy-xfce-latest.img.xz
+		$SHELL $(dirname $0)/ignition2.sh /dev/mmcblk0 ${IMG_HOST}${IMG_DIR}${WD_IMAGE}
 		exit $?
 	fi
 
@@ -45,13 +57,12 @@ if [[ $CHOICE = Jessie* ]]; then
 	# find selected flavour
 	if [[ $CHOICE = *CLI* ]]; then
 		printf "Selected Flavour: %s\n" "CLI"
-		$SHELL $(dirname $0)/ignition2.sh /dev/mmcblk0 https://images.solid-build.xyz/IMX6/Debian/sr-imx6-debian-jessie-cli-latest.img.xz
+		$SHELL $(dirname $0)/ignition2.sh /dev/mmcblk0 ${IMG_HOST}${IMG_DIR}${JC_IMAGE}
 		exit $?
 	fi
-
 	if [[ $CHOICE = *Mate* ]]; then
-		printf "Selected Flavour: %s\n" "XFCE"
-		$SHELL $(dirname $0)/ignition2.sh /dev/mmcblk0 https://images.solid-build.xyz/IMX6/Debian/sr-imx6-debian-jessie-mate-latest.img.xz
+		printf "Selected Flavour: %s\n" "Mate"
+		$SHELL $(dirname $0)/ignition2.sh /dev/mmcblk0 ${IMG_HOST}${IMG_DIR}${JD_IMAGE}
 		exit $?
 	fi
 
@@ -60,6 +71,18 @@ if [[ $CHOICE = Jessie* ]]; then
 	exit 1
 fi
 
+if [[ $CHOICE = Stretch* ]]; then
+	printf "Selected Release: %s\n" "Stretch"
+	# find selected flavour
+	if [[ $CHOICE = *CLI* ]]; then
+		printf "Selected Flavour: %s\n" "CLI"
+		$SHELL $(dirname $0)/ignition2.sh /dev/mmcblk0 ${IMG_HOST}${IMG_DIR}${SC_IMAGE}
+		exit $?
+	fi
+	# unknown flavour
+	printf "Selected Flavour: %s\n" "Unknown"
+	exit 1
+fi
 # unknown release
-echo "Selected Release: %s\n" "Unknown"
+printf "Selected Release: %s\n" "Unknown"
 exit 1

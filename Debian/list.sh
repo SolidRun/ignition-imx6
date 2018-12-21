@@ -26,4 +26,5 @@ Wheezy CLI
 Wheezy Desktop XFCE
 Jessie CLI
 Jessie Desktop Mate
+Stretch CLI
 EOF
